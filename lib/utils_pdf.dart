@@ -1,10 +1,10 @@
+import 'package:example_generate_pdf/models/invoice.dart';
 import 'package:example_generate_pdf/models/product.dart';
 import 'package:flutter/foundation.dart';
-
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:example_generate_pdf/models/invoice.dart';
 import 'package:printing/printing.dart';
 
 class GeneratePDF {
@@ -16,9 +16,14 @@ class GeneratePDF {
   /// Cria e Imprime a fatura
   generatePDFInvoice() async {
     final pw.Document doc = pw.Document();
+    final customFont =
+        pw.Font.ttf((await rootBundle.load('assets/RobotoSlabt.ttf')));
     doc.addPage(
       pw.MultiPage(
-        pageTheme: pw.PageTheme(margin: pw.EdgeInsets.zero),
+        pageTheme: pw.PageTheme(
+            margin: pw.EdgeInsets.zero,
+            theme:
+                pw.ThemeData(defaultTextStyle: pw.TextStyle(font: customFont))),
         header: _buildHeader,
         footer: _buildPrice,
         build: (context) => _buildContent(context),
