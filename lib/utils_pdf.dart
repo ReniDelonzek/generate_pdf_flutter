@@ -16,7 +16,7 @@ class GeneratePDF {
   /// Cria e Imprime a fatura
   generatePDFInvoice() async {
     final pw.Document doc = pw.Document();
-    final customFont =
+    final pw.Font customFont =
         pw.Font.ttf((await rootBundle.load('assets/RobotoSlabt.ttf')));
     doc.addPage(
       pw.MultiPage(
